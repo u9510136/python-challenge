@@ -6,6 +6,7 @@ can_name = ["Khan","Correy","Li","O'Tooley"]
 can_vote = [0,0,0,0]
 can_percent = [0,0,0,0]
 
+# Read data from csv file
 vote_csv = os.path.join("election_data.csv")
 
 with open(vote_csv, "r", encoding = "UTF-8") as csvfile:
@@ -15,7 +16,7 @@ with open(vote_csv, "r", encoding = "UTF-8") as csvfile:
 
     for row in csvreader:
 
-       # print(row)
+      # count every candidate's total vote 
       total_vote += 1
       if row[2] == can_name[0]:
         can_vote[0] += 1
@@ -26,6 +27,7 @@ with open(vote_csv, "r", encoding = "UTF-8") as csvfile:
       else:
         can_vote[3] += 1
 
+# find the winner
 if max(can_vote) == can_vote[0]:
     winner = can_name[0]
 elif max(can_vote) == can_vote[1]:
@@ -35,7 +37,7 @@ elif max(can_vote) == can_vote[2]:
 else:
     winner = can_name[3]
 
-
+# print the result
 print("Election Results")
 print("--------------------------")
 print("Total Votes: " + str(total_vote))
@@ -47,7 +49,10 @@ print("--------------------------")
 print("Winner: " + winner)
 print("--------------------------")
 
+# zip dataset together
 result = zip(can_name, can_percent, can_vote)
+
+# export the result into a new csv file
 wrpath = os.path.join(".","election.csv")
 
 with open(wrpath, 'w', newline = '', encoding = "UTF-8") as datafile:
